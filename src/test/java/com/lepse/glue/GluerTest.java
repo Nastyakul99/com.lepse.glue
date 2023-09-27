@@ -60,15 +60,30 @@ public class GluerTest {
 		
 		String result = mapper.map(set, new Symbol(" | "), new Symbol("<"), new Symbol(">"));
 
-		System.out.println(result);
+		//System.out.println(result);
 		Assert.assertEquals(result, "<aaa | bbb | ddd>");
 		
 		result = mapper.map(set, null, null, null);
-		System.out.println(result);
+		//System.out.println(result);
 		Assert.assertEquals(result, "aaabbbddd");
 		
 		result = mapper.map(set, new Symbol(" | "), null, null);
-		System.out.println(result);
+		//System.out.println(result);
 		Assert.assertEquals(result, "aaa | bbb | ddd");
+	}
+	
+	@Test
+	public void gluingVarargsTest() {
+		IGluer gluer = new Gluer();
+		
+		String result = gluer.glue(new Symbol(" | "), 1, 2, 3, 4);
+
+		System.out.println(result);
+		Assert.assertEquals(result, "1 | 2 | 3 | 4");
+		
+		result = gluer.glue(new Symbol(" * "), true, false, false);
+
+		System.out.println(result);
+		Assert.assertEquals(result, "true * false * false");
 	}
 }

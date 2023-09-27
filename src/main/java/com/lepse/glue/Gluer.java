@@ -1,5 +1,6 @@
 package com.lepse.glue;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import com.lepse.glue.symbols.ISymbol;
 import com.lepse.glue.symbols.Symbols;
@@ -32,5 +33,9 @@ public class Gluer implements IGluer {
 
 	private String asString(Object e) {
 		return e == null ? emptyElement.value() : e.toString();
+	}
+
+	public <T> String glue(ISymbol separator, T... elements) {
+		return glue(Arrays.asList(elements), separator);
 	}
 }
